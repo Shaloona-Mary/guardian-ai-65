@@ -10,11 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactsRouteImport } from './routes/contacts'
+import { Route as FallDetectionRouteImport } from './routes/fall-detection'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as MedicalProfileRouteImport } from './routes/medical-profile'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FallDetectionRoute = FallDetectionRouteImport.update({
+  id: '/fall-detection',
+  path: '/fall-detection',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -22,31 +35,55 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MedicalProfileRoute = MedicalProfileRouteImport.update({
+  id: '/medical-profile',
+  path: '/medical-profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contacts': typeof ContactsRoute
+  '/fall-detection': typeof FallDetectionRoute
   '/login': typeof LoginRoute
+  '/medical-profile': typeof MedicalProfileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contacts': typeof ContactsRoute
+  '/fall-detection': typeof FallDetectionRoute
   '/login': typeof LoginRoute
+  '/medical-profile': typeof MedicalProfileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contacts': typeof ContactsRoute
+  '/fall-detection': typeof FallDetectionRoute
   '/login': typeof LoginRoute
+  '/medical-profile': typeof MedicalProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login'
+  fullPaths:
+    '/' | '/contacts' | '/fall-detection' | '/login' | '/medical-profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login'
-  id: '__root__' | '/' | '/login'
+  to: '/' | '/contacts' | '/fall-detection' | '/login' | '/medical-profile'
+  id:
+    | '__root__'
+    | '/'
+    | '/contacts'
+    | '/fall-detection'
+    | '/login'
+    | '/medical-profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactsRoute: typeof ContactsRoute
+  FallDetectionRoute: typeof FallDetectionRoute
   LoginRoute: typeof LoginRoute
+  MedicalProfileRoute: typeof MedicalProfileRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +95,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fall-detection': {
+      id: '/fall-detection'
+      path: '/fall-detection'
+      fullPath: '/fall-detection'
+      preLoaderRoute: typeof FallDetectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -65,12 +116,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/medical-profile': {
+      id: '/medical-profile'
+      path: '/medical-profile'
+      fullPath: '/medical-profile'
+      preLoaderRoute: typeof MedicalProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactsRoute: ContactsRoute,
+  FallDetectionRoute: FallDetectionRoute,
   LoginRoute: LoginRoute,
+  MedicalProfileRoute: MedicalProfileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

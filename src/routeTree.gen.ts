@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as FallDetectionRouteImport } from './routes/fall-detection'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MedicalProfileRouteImport } from './routes/medical-profile'
@@ -17,6 +18,11 @@ import { Route as MedicalProfileRouteImport } from './routes/medical-profile'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FallDetectionRoute = FallDetectionRouteImport.update({
@@ -37,12 +43,14 @@ const MedicalProfileRoute = MedicalProfileRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contacts': typeof ContactsRoute
   '/fall-detection': typeof FallDetectionRoute
   '/login': typeof LoginRoute
   '/medical-profile': typeof MedicalProfileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contacts': typeof ContactsRoute
   '/fall-detection': typeof FallDetectionRoute
   '/login': typeof LoginRoute
   '/medical-profile': typeof MedicalProfileRoute
@@ -50,20 +58,29 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contacts': typeof ContactsRoute
   '/fall-detection': typeof FallDetectionRoute
   '/login': typeof LoginRoute
   '/medical-profile': typeof MedicalProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/fall-detection' | '/login' | '/medical-profile'
+  fullPaths:
+    '/' | '/contacts' | '/fall-detection' | '/login' | '/medical-profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/fall-detection' | '/login' | '/medical-profile'
-  id: '__root__' | '/' | '/fall-detection' | '/login' | '/medical-profile'
+  to: '/' | '/contacts' | '/fall-detection' | '/login' | '/medical-profile'
+  id:
+    | '__root__'
+    | '/'
+    | '/contacts'
+    | '/fall-detection'
+    | '/login'
+    | '/medical-profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactsRoute: typeof ContactsRoute
   FallDetectionRoute: typeof FallDetectionRoute
   LoginRoute: typeof LoginRoute
   MedicalProfileRoute: typeof MedicalProfileRoute
@@ -76,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fall-detection': {
@@ -104,6 +128,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactsRoute: ContactsRoute,
   FallDetectionRoute: FallDetectionRoute,
   LoginRoute: LoginRoute,
   MedicalProfileRoute: MedicalProfileRoute,

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FallDetectionRouteImport } from './routes/fall-detection'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as MedicalProfileRouteImport } from './routes/medical-profile'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MedicalProfileRoute = MedicalProfileRouteImport.update({
+  id: '/medical-profile',
+  path: '/medical-profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/fall-detection': typeof FallDetectionRoute
   '/login': typeof LoginRoute
+  '/medical-profile': typeof MedicalProfileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/fall-detection': typeof FallDetectionRoute
   '/login': typeof LoginRoute
+  '/medical-profile': typeof MedicalProfileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/fall-detection': typeof FallDetectionRoute
   '/login': typeof LoginRoute
+  '/medical-profile': typeof MedicalProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/fall-detection' | '/login'
+  fullPaths: '/' | '/fall-detection' | '/login' | '/medical-profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/fall-detection' | '/login'
-  id: '__root__' | '/' | '/fall-detection' | '/login'
+  to: '/' | '/fall-detection' | '/login' | '/medical-profile'
+  id: '__root__' | '/' | '/fall-detection' | '/login' | '/medical-profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FallDetectionRoute: typeof FallDetectionRoute
   LoginRoute: typeof LoginRoute
+  MedicalProfileRoute: typeof MedicalProfileRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/medical-profile': {
+      id: '/medical-profile'
+      path: '/medical-profile'
+      fullPath: '/medical-profile'
+      preLoaderRoute: typeof MedicalProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FallDetectionRoute: FallDetectionRoute,
   LoginRoute: LoginRoute,
+  MedicalProfileRoute: MedicalProfileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

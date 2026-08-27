@@ -10,14 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as FallDetectionRouteImport } from './routes/fall-detection'
+import { Route as FirstAidRouteImport } from './routes/first-aid'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as LocationRouteImport } from './routes/location'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MedicalProfileRouteImport } from './routes/medical-profile'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactsRoute = ContactsRouteImport.update({
@@ -28,6 +37,21 @@ const ContactsRoute = ContactsRouteImport.update({
 const FallDetectionRoute = FallDetectionRouteImport.update({
   id: '/fall-detection',
   path: '/fall-detection',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FirstAidRoute = FirstAidRouteImport.update({
+  id: '/first-aid',
+  path: '/first-aid',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationRoute = LocationRouteImport.update({
+  id: '/location',
+  path: '/location',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -43,45 +67,82 @@ const MedicalProfileRoute = MedicalProfileRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/contacts': typeof ContactsRoute
   '/fall-detection': typeof FallDetectionRoute
+  '/first-aid': typeof FirstAidRoute
+  '/history': typeof HistoryRoute
+  '/location': typeof LocationRoute
   '/login': typeof LoginRoute
   '/medical-profile': typeof MedicalProfileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/contacts': typeof ContactsRoute
   '/fall-detection': typeof FallDetectionRoute
+  '/first-aid': typeof FirstAidRoute
+  '/history': typeof HistoryRoute
+  '/location': typeof LocationRoute
   '/login': typeof LoginRoute
   '/medical-profile': typeof MedicalProfileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/contacts': typeof ContactsRoute
   '/fall-detection': typeof FallDetectionRoute
+  '/first-aid': typeof FirstAidRoute
+  '/history': typeof HistoryRoute
+  '/location': typeof LocationRoute
   '/login': typeof LoginRoute
   '/medical-profile': typeof MedicalProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/contacts' | '/fall-detection' | '/login' | '/medical-profile'
+    | '/'
+    | '/assistant'
+    | '/contacts'
+    | '/fall-detection'
+    | '/first-aid'
+    | '/history'
+    | '/location'
+    | '/login'
+    | '/medical-profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contacts' | '/fall-detection' | '/login' | '/medical-profile'
+  to:
+    | '/'
+    | '/assistant'
+    | '/contacts'
+    | '/fall-detection'
+    | '/first-aid'
+    | '/history'
+    | '/location'
+    | '/login'
+    | '/medical-profile'
   id:
     | '__root__'
     | '/'
+    | '/assistant'
     | '/contacts'
     | '/fall-detection'
+    | '/first-aid'
+    | '/history'
+    | '/location'
     | '/login'
     | '/medical-profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssistantRoute: typeof AssistantRoute
   ContactsRoute: typeof ContactsRoute
   FallDetectionRoute: typeof FallDetectionRoute
+  FirstAidRoute: typeof FirstAidRoute
+  HistoryRoute: typeof HistoryRoute
+  LocationRoute: typeof LocationRoute
   LoginRoute: typeof LoginRoute
   MedicalProfileRoute: typeof MedicalProfileRoute
 }
@@ -93,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contacts': {
@@ -107,6 +175,27 @@ declare module '@tanstack/react-router' {
       path: '/fall-detection'
       fullPath: '/fall-detection'
       preLoaderRoute: typeof FallDetectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/first-aid': {
+      id: '/first-aid'
+      path: '/first-aid'
+      fullPath: '/first-aid'
+      preLoaderRoute: typeof FirstAidRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/location': {
+      id: '/location'
+      path: '/location'
+      fullPath: '/location'
+      preLoaderRoute: typeof LocationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -128,8 +217,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssistantRoute: AssistantRoute,
   ContactsRoute: ContactsRoute,
   FallDetectionRoute: FallDetectionRoute,
+  FirstAidRoute: FirstAidRoute,
+  HistoryRoute: HistoryRoute,
+  LocationRoute: LocationRoute,
   LoginRoute: LoginRoute,
   MedicalProfileRoute: MedicalProfileRoute,
 }

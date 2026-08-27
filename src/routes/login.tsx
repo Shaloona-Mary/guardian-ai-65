@@ -97,7 +97,7 @@ function LoginPage() {
   };
 
   const field = (
-    id: string,
+    id: keyof Errors,
     label: string,
     props: React.InputHTMLAttributes<HTMLInputElement>,
   ) => (

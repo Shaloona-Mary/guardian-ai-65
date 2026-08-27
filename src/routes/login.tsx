@@ -28,7 +28,14 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
 });
 
-type Errors = Record<string, string>;
+type Errors = Partial<{
+  identifier: string;
+  password: string;
+  name: string;
+  email: string;
+  userId: string;
+  phone: string;
+}>;
 
 function LoginPage() {
   const { login, signup, user, ready, theme, toggleTheme } = useApp();
@@ -90,7 +97,7 @@ function LoginPage() {
   };
 
   const field = (
-    id: string,
+    id: keyof Errors,
     label: string,
     props: React.InputHTMLAttributes<HTMLInputElement>,
   ) => (

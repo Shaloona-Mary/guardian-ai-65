@@ -17,7 +17,6 @@ import {
   X,
   Bell,
   User,
-  ShieldAlert,
   ChevronDown,
   Search,
 } from "lucide-react";
@@ -154,34 +153,16 @@ export function AppShell({
         <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur-md">
           <div className="flex items-center justify-between gap-4 px-4 py-3 sm:px-6">
             
-            {/* Left Side: Mobile Menu + Small Logo */}
-            <div className="flex items-center gap-3 min-w-0">
+            {/* Left Side: Mobile Menu + Search Bar */}
+            <div className="flex flex-1 items-center gap-3 min-w-0 max-w-md">
               <button
                 onClick={() => setOpen(true)}
                 aria-label="Open navigation"
-                className="rounded-xl border border-border p-2 hover:bg-accent lg:hidden transition-colors"
+                className="rounded-xl border border-border p-2 hover:bg-accent lg:hidden transition-colors shrink-0"
               >
                 <Menu className="size-5" />
               </button>
 
-              {/* Small emergency logo on left */}
-              <Link to="/" className="flex items-center gap-2.5 group">
-                <span className="relative grid size-9 shrink-0 place-items-center rounded-xl bg-emergency/15 text-emergency shadow-xs transition-transform group-hover:scale-105">
-                  <ShieldAlert className="size-4 animate-pulse" />
-                </span>
-                <div className="hidden sm:block min-w-0">
-                  <span className="block truncate font-display text-sm font-black tracking-tight text-foreground">
-                    Guardian AI
-                  </span>
-                  <span className="block truncate text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
-                    Emergency Assistant
-                  </span>
-                </div>
-              </Link>
-            </div>
-
-            {/* Middle Section: Global Search Bar Trigger + Page Title */}
-            <div className="flex-1 max-w-md mx-2 sm:mx-4">
               <button
                 onClick={() => setSearchOpen(true)}
                 className="w-full flex items-center gap-2.5 rounded-2xl border border-border bg-card/80 px-3.5 py-2 text-xs text-muted-foreground shadow-xs transition-all hover:bg-accent hover:border-primary/40 hover:shadow-sm"
@@ -192,19 +173,8 @@ export function AppShell({
               </button>
             </div>
 
-            {/* Right Side: Mobile Search + Emergency Status Badge + Notifications + User Details + Dark Mode Toggle */}
+            {/* Right Side: Emergency Status Badge + Notifications + User Details + Dark Mode Toggle */}
             <div className="flex shrink-0 items-center gap-2.5">
-              
-              {/* Mobile Search Icon Trigger Button */}
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-xl border-border hover:bg-accent sm:hidden"
-                aria-label="Search"
-                onClick={() => setSearchOpen(true)}
-              >
-                <Search className="size-4 text-foreground" />
-              </Button>
 
               {/* Emergency Status Pill */}
               <span
